@@ -4,7 +4,7 @@ import { HeartPulse, Stethoscope, Briefcase } from 'lucide-react';
 
 const HealthProtection = () => {
   return (
-    <div className="py-24 bg-navy-800 relative">
+    <div className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -12,8 +12,8 @@ const HealthProtection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Health & Income <span className="text-gold-400 italic">Protection</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 text-navy-900">Health & Income <span className="text-teal-500 italic">Protection</span></h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Your ability to earn is your greatest asset. Protect it with comprehensive solutions designed for entrepreneurs and families.
           </p>
         </motion.div>
@@ -25,21 +25,21 @@ const HealthProtection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
-            className="group relative bg-navy-900 border border-white/5 p-8 rounded-2xl hover:border-gold-400/30 transition-all duration-300"
+            className="group relative bg-cream-50 border border-gray-100 p-8 rounded-2xl hover:border-teal-400 hover:shadow-lg hover:shadow-teal-400/10 transition-all duration-300"
           >
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Stethoscope size={120} className="text-white" />
+            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <Stethoscope size={120} className="text-navy-900" />
             </div>
             
             <div className="relative z-10">
-              <div className="bg-white/5 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                <HeartPulse className="text-gold-400" size={28} />
+              <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm border border-gray-100">
+                <HeartPulse className="text-teal-500" size={28} />
               </div>
-              <h3 className="text-2xl font-bold mb-3">Living Benefits</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <h3 className="text-2xl font-bold mb-3 text-navy-900">Living Benefits</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Rising health costs shouldn't threaten your financial stability. Our plans cover dental, vision, and critical illness gaps that standard insurance misses.
               </p>
-              <div className="flex items-center text-sm font-bold text-gold-400 uppercase tracking-widest">
+              <div className="flex items-center text-sm font-bold text-teal-600 uppercase tracking-widest">
                 <span>Coverage from $100/mo</span>
               </div>
             </div>
@@ -51,21 +51,21 @@ const HealthProtection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
-            className="group relative bg-navy-900 border border-white/5 p-8 rounded-2xl hover:border-gold-400/30 transition-all duration-300"
+            className="group relative bg-cream-50 border border-gray-100 p-8 rounded-2xl hover:border-teal-400 hover:shadow-lg hover:shadow-teal-400/10 transition-all duration-300"
           >
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Briefcase size={120} className="text-white" />
+            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <Briefcase size={120} className="text-navy-900" />
             </div>
             
             <div className="relative z-10">
-              <div className="bg-white/5 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                 <ShieldCheckIcon className="text-gold-400" size={28} />
+              <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm border border-gray-100">
+                 <ShieldCheckIcon className="text-teal-500" size={28} />
               </div>
-              <h3 className="text-2xl font-bold mb-3">Income Protection</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <h3 className="text-2xl font-bold mb-3 text-navy-900">Income Protection</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Stay solvent even when life happens. Supplemental income plans (like Aflac) ensure your bills are paid if illness keeps you from working.
               </p>
-              <div className="flex items-center text-sm font-bold text-gold-400 uppercase tracking-widest">
+              <div className="flex items-center text-sm font-bold text-teal-600 uppercase tracking-widest">
                 <span>Safeguard Your Assets</span>
               </div>
             </div>
