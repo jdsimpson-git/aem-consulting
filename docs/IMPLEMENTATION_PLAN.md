@@ -1,162 +1,361 @@
-# Auntie Website - Implementation Plan (MVP)
+# aem-consultings Website - Implementation Plan
 
-This roadmap breaks down the development of the **Auntie Insurance Platform** into daily 2-hour work sessions. The goal is to build a functional MVP with a core **AI Chatbot** that guides users from qualification to policy issuance.
+This roadmap breaks down the development of the **aem-consultings Insurance Platform** into daily 2-hour work sessions. The goal is to build a functional MVP with a core **AI Chatbot** that guides users from qualification to policy issuance, followed by a post-MVP phase for advanced features.
 
-**Total Duration:** ~25 Days (2 Hours/Day)
-**Primary Tech Stack:** React (Vite), Supabase (Auth, DB, Storage, Edge Functions), OpenAI, Stripe, Resend.
+**Total Duration:** 
+- **MVP:** ~28 Days (2 Hours/Day)
+- **Post-MVP:** ~15 Days (2 Hours/Day)
+
+**Primary Tech Stack:** React (Vite), Tailwind CSS, shadcn/ui, Zustand, Supabase (Auth, DB, Storage, Edge Functions), OpenAI, Stripe, Resend, Sentry.
 
 ---
 
-## Phase 1: Foundation & AI Core (Days 1-5)
-**Goal:** Set up the infrastructure and build the intelligent "Auntie" chat interface.
+## Phase 1: Foundation & Setup (Days 1-4)
+**Goal:** Set up the infrastructure and development environment.
 
 ### Day 1: Project & Supabase Setup
-*   [ ] **Tech Setup:** Initialize a new Supabase project (Free Tier).
-*   [ ] **Env Vars:** Connect Supabase URL/Anon Key to the local React app (`.env`).
-*   [ ] **Cleanup:** Clear existing demo components in the React app to make space for the product.
-*   [ ] **Deliverable:** App runs locally and connects to a live backend instance.
+*   [ ] **Supabase Project:** Create a new Supabase project (Free Tier).
+*   [ ] **Env Configuration:** Set up `.env.local` with Supabase URL/Anon Key.
+*   [ ] **Cleanup:** Clear existing demo components to make space for the product.
+*   [ ] **Verification:** App runs locally and connects to Supabase.
+*   [ ] **Deliverable:** Development environment ready.
 
-### Day 2: Database Schema & Security
-*   [ ] **Schema Definition:** Create tables in Supabase: `users`, `conversations`, `quotes`, `applications` (refer to DESIGN_SPEC.md).
-*   [ ] **Security:** Enable Row Level Security (RLS). Policies: Users can only read/write their own data.
+### Day 2: UI Foundation & Design System
+*   [ ] **shadcn/ui Setup:** Initialize shadcn/ui with Tailwind.
+*   [ ] **Core Components:** Install Button, Input, Card, Dialog, Form components.
+*   [ ] **Theme:** Configure brand colors (warm, trustworthy palette).
+*   [ ] **Layout:** Create base layout component with responsive container.
+*   [ ] **Deliverable:** Design system foundation established.
+
+### Day 3: Database Schema & Security
+*   [ ] **Schema Creation:** Create all MVP tables in Supabase:
+    - `users` (extended profile)
+    - `conversations`
+    - `chat_messages`
+    - `quotes`
+    - `applications`
+    - `policies`
+    - `payments`
+    - `audit_log`
+*   [ ] **RLS Policies:** Enable Row Level Security on all tables.
+*   [ ] **Indexes:** Create performance indexes (see DESIGN_SPEC.md).
 *   [ ] **Deliverable:** Database tables created and secured.
 
-### Day 3: AI Chat Interface (Frontend)
-*   [ ] **UI Build:** Create a sticky or full-page "Chat with Auntie" component.
-*   [ ] **State:** Manage chat history (user vs. AI messages) in React state.
-*   [ ] **UX:** Add loading states (typing indicators) and auto-scroll.
-*   [ ] **Deliverable:** A functional chat UI (static/mock responses).
-
-### Day 4: AI Integration (Backend)
-*   [ ] **Edge Function:** Create a Supabase Edge Function `ai-chat`.
-*   [ ] **OpenAI Connection:** Configure OpenAI API key in Supabase secrets.
-*   [ ] **Logic:** Pass user input to GPT-4/3.5-turbo and return a response.
-*   [ ] **Deliverable:** Frontend chat sends message -> Backend -> OpenAI -> Backend -> Frontend displays reply.
-
-### Day 5: Chat-to-Data Pipeline
-*   [ ] **System Prompt:** Engineer the AI system prompt to "act as an insurance advisor" and extract key data (Age, Zip, Dependents).
-*   [ ] **Structured Output:** Force the AI to return JSON metadata (recommendations) alongside the text reply.
-*   [ ] **Persistence:** Save chat logs to the `conversations` table.
-*   [ ] **Deliverable:** Chatbot distinguishes between "Small talk" and "Data extraction".
+### Day 4: State Management & Project Structure
+*   [ ] **Zustand Setup:** Create stores for:
+    - `useAuthStore` (user session)
+    - `useChatStore` (conversation state)
+    - `useQuoteStore` (current quote)
+*   [ ] **Folder Structure:** Organize `/components`, `/hooks`, `/stores`, `/lib`, `/pages`.
+*   [ ] **API Client:** Set up Supabase client wrapper with error handling.
+*   [ ] **Deliverable:** Clean architecture established.
 
 ---
 
-## Phase 2: Quote Engine & Accounts (Days 6-10)
+## Phase 2: AI Chat Core (Days 5-9)
+**Goal:** Build the intelligent aem-consultings chat interface.
+
+### Day 5: Chat Interface (Frontend)
+*   [ ] **UI Build:** Create `ChatWindow` component (full-page or modal).
+*   [ ] **Message Components:** `UserMessage`, `AssistantMessage`, `TypingIndicator`.
+*   [ ] **State:** Integrate with `useChatStore` for message history.
+*   [ ] **UX Polish:** Auto-scroll, loading states, message timestamps.
+*   [ ] **Deliverable:** Functional chat UI with mock responses.
+
+### Day 6: AI Edge Function (Backend - Part 1)
+*   [ ] **Edge Function:** Create `supabase/functions/ai-chat/index.ts`.
+*   [ ] **OpenAI Setup:** Configure API key in Supabase secrets.
+*   [ ] **Basic Flow:** User message → OpenAI API → Response.
+*   [ ] **Error Handling:** Graceful fallback if OpenAI is unavailable.
+*   [ ] **Deliverable:** Basic AI responses working.
+
+### Day 7: AI Edge Function (Backend - Part 2)
+*   [ ] **System Prompt:** Engineer detailed prompt:
+    - Persona: "Friendly insurance advisor representing aem-consultings"
+    - Task: Understand needs, recommend products, extract data
+    - Constraints: No financial advice, stay on topic
+*   [ ] **Structured Output:** Force JSON metadata with text reply.
+*   [ ] **Data Extraction:** Parse age, zip, dependents, smoker status from conversation.
+*   [ ] **Deliverable:** AI extracts structured data from natural conversation.
+
+### Day 8: Chat Persistence & Guest Sessions
+*   [ ] **Guest Sessions:** Generate anonymous session ID for non-logged users.
+*   [ ] **Message Storage:** Save all messages to `chat_messages` table.
+*   [ ] **Conversation Summary:** AI generates summary after key milestones.
+*   [ ] **Rate Limiting:** Implement 20 msg/hour for users, 5/hour for guests.
+*   [ ] **Deliverable:** Chat history persists and is rate-limited.
+
+### Day 9: Chat-to-Quote Trigger
+*   [ ] **Data Check:** After each message, check if we have enough data for quote.
+*   [ ] **Required Fields:** Age, zip code, coverage interest (term/whole).
+*   [ ] **Trigger UI:** When ready, show "Get Your Quote" call-to-action in chat.
+*   [ ] **Handoff:** Pass extracted data to quote flow.
+*   [ ] **Deliverable:** Seamless transition from chat to quote.
+
+---
+
+## Phase 3: Quote Engine & Accounts (Days 10-15)
 **Goal:** Turn chat data into real insurance quotes and save user progress.
 
-### Day 6: Quote Logic Implementation
-*   [ ] **Pricing Model:** Create a simple JSON or Database table for pricing rates (e.g., base rate per $1000 coverage by age band).
-*   [ ] **Calculation Function:** Create a utility (or Edge Function) that takes Age/Gender/Smoker status and outputs a Monthly Premium.
-*   [ ] **Deliverable:** A working calculator (e.g., `calculatePremium(30, 'term', 500000) => $22.50`).
+### Day 10: Quote Calculation Logic
+*   [ ] **Pricing Table:** Create rate table in database or JSON config.
+*   [ ] **Premium Formula:** Implement calculation function:
+    - Base rate by age band
+    - Adjustments for smoker, term length, gender, health class
+*   [ ] **Edge Function:** Create `generate-quote` function.
+*   [ ] **Deliverable:** Working calculator (e.g., `calculatePremium(35, 'term', 500000) => $24.50`).
 
-### Day 7: Quote UI & Display
-*   [ ] **Integration:** When Chatbot detects sufficient data, trigger the Quote function.
-*   [ ] **UI Card:** Design a "Quote Card" that slides in or appears in the chat stream.
-*   [ ] **Call to Action:** Add buttons: "Customize Quote" or "Apply Now".
-*   [ ] **Deliverable:** User gets a price in the chat window.
+### Day 11: Quote Display UI
+*   [ ] **Quote Card:** Design premium display with coverage details.
+*   [ ] **Breakdown:** Show base rate + adjustments transparently.
+*   [ ] **CTAs:** "Customize Quote" and "Apply Now" buttons.
+*   [ ] **Save Quote:** Store quote in database with expiration date.
+*   [ ] **Deliverable:** User sees personalized quote.
 
-### Day 8: Product Configurator
-*   [ ] **Slider UI:** Allow users to adjust Coverage Amount ($100k - $1M) and Term Length (10-30y) on the Quote Card.
-*   [ ] **Live Updates:** Recalculate premium instantly as sliders move.
+### Day 12: Quote Customization
+*   [ ] **Sliders:** Coverage amount ($100k - $1M), Term length (10-30y).
+*   [ ] **Live Updates:** Recalculate premium as sliders move (debounced).
+*   [ ] **Comparison:** Show side-by-side term vs whole life (if applicable).
 *   [ ] **Deliverable:** Interactive quote customization.
 
-### Day 9: Authentication Integration
-*   [ ] **Sign Up Flow:** When user clicks "Apply Now", trigger Supabase Auth (Email/Password or Google).
-*   [ ] **Context persistence:** Ensure chat history and quote data are linked to the new `user_id` after login.
-*   [ ] **Deliverable:** User can sign up/login and not lose their quote.
+### Day 13: Authentication Flow
+*   [ ] **Auth UI:** Sign up / Login modal with email + Google OAuth.
+*   [ ] **Protected Routes:** Implement route guards for `/dashboard`, `/apply`.
+*   [ ] **Session Management:** Handle token refresh, logout.
+*   [ ] **Deliverable:** Secure authentication working.
 
-### Day 10: User Dashboard Foundation
-*   [ ] **Dashboard Page:** Create `/dashboard` route (protected).
-*   [ ] **State Display:** Show current status (e.g., "Quote Saved" or "Application Started").
-*   [ ] **Deliverable:** A personalised home base for the user.
+### Day 14: Guest-to-User Migration
+*   [ ] **Conversation Transfer:** Link guest `conversation_id` to new user.
+*   [ ] **Quote Association:** Update quote's `user_id` after signup.
+*   [ ] **Magic Link:** Add passwordless login option.
+*   [ ] **Deliverable:** Zero data loss when guests become users.
+
+### Day 15: User Dashboard
+*   [ ] **Dashboard Page:** Create protected `/dashboard` route.
+*   [ ] **Status Cards:** Show current quote, application status, active policy.
+*   [ ] **Quick Actions:** "Continue Application", "Download Policy", "Chat with the aem-consultings assistant".
+*   [ ] **Deliverable:** Personalized home base for users.
 
 ---
 
-## Phase 3: Application Flow (Days 11-15)
+## Phase 4: Application Flow (Days 16-21)
 **Goal:** Collect the necessary data to legally issue a policy.
 
-### Day 11: Application Form Structure
-*   [ ] **Form Layout:** Create a multi-step wizard (Step 1: Personal, Step 2: Health, Step 3: Beneficiaries).
-*   [ ] **Auto-fill:** Pre-populate data known from the Chat/Quote phase.
-*   [ ] **Deliverable:** Basic navigation between form steps.
+### Day 16: Application Form Structure
+*   [ ] **Multi-Step Wizard:** Personal Info → Medical → Beneficiaries → Review.
+*   [ ] **Progress Bar:** Visual indicator of completion.
+*   [ ] **Auto-Save:** Save progress on each step change.
+*   [ ] **Auto-Fill:** Pre-populate known data from chat/quote.
+*   [ ] **Deliverable:** Navigation between form steps.
 
-### Day 12: Health & Lifestyle Questions
-*   [ ] **Knockout Logic:** Implement logic for straight-through processing (e.g., "Have you had a heart attack?" -> If Yes, refer to agent).
-*   [ ] **Data Save:** Save answers progressively to `applications` table (JSON column).
-*   [ ] **Deliverable:** Functional medical questionnaire.
+### Day 17: Personal Information Step
+*   [ ] **Fields:** Full name, DOB, SSN (last 4), address, phone, email.
+*   [ ] **Validation:** Real-time validation with Zod schemas.
+*   [ ] **Address Lookup:** Optional zip code autocomplete.
+*   [ ] **Deliverable:** Personal info collection working.
 
-### Day 13: Identity & Beneficiaries
-*   [ ] **Beneficiary Inputs:** Form for Name, Relation, % Split.
-*   [ ] **Legal Disclosures:** Add checkboxes for HIPAA authorization and Truth in Application.
-*   [ ] **Deliverable:** Completed application data set.
+### Day 18: Medical Questionnaire
+*   [ ] **Knockout Questions:** Implement 5 critical health questions.
+*   [ ] **Conditional Logic:** Show follow-up questions based on answers.
+*   [ ] **Knockout Flow:** If "Yes" to critical question → show referral message.
+*   [ ] **Data Storage:** Save answers progressively to `applications.health_answers`.
+*   [ ] **Deliverable:** Functional medical questionnaire with knockout logic.
 
-### Day 14: E-Consent & Application "Submit"
-*   [ ] **Summary View:** Page to review all answers before submitting.
-*   [ ] **Signature UI:** A simple canvas or text input to "Type Name" as e-signature.
-*   [ ] **Submission:** Update application status to `submitted` in DB.
-*   [ ] **Deliverable:** User can formally submit the application.
+### Day 19: Beneficiaries & Disclosures
+*   [ ] **Beneficiary Form:** Name, relationship, percentage split.
+*   [ ] **Multiple Beneficiaries:** Add/remove beneficiary rows (max 5).
+*   [ ] **Disclosures:** HIPAA authorization, Truth in Application checkboxes.
+*   [ ] **Deliverable:** Beneficiary and legal disclosure collection.
 
-### Day 15: Underwriting Simulation (Mock)
-*   [ ] **Rule Engine:** Simple backend check: If no major health issues + Age < 50 -> Status `approved`.
-*   [ ] **Feedback:** Show "Approving..." spinner, then "Congratulations!" screen.
-*   [ ] **Deliverable:** Instant decisioning capability.
+### Day 20: Review & E-Signature
+*   [ ] **Summary View:** Display all answers for review before submission.
+*   [ ] **Edit Capability:** Click to edit any section.
+*   [ ] **E-Signature:** "Type your full name" input with timestamp + IP capture.
+*   [ ] **Submit:** Update application status to `submitted`.
+*   [ ] **Deliverable:** User can formally submit application.
+
+### Day 21: Underwriting Engine (MVP)
+*   [ ] **Rule Engine:** Implement approval criteria (see DESIGN_SPEC.md):
+    - Age 18-50, no knockout answers, coverage ≤ $500k → Auto-approve
+    - Otherwise → `under_review` status
+*   [ ] **Decision UI:** "Processing..." spinner → Result screen.
+*   [ ] **Audit Log:** Record decision with timestamp and reason.
+*   [ ] **Deliverable:** Instant decisioning for qualified applicants.
 
 ---
 
-## Phase 4: Payments & Policy Issuance (Days 16-20)
-**Goal:** Take money and deliver the digital product.
+## Phase 5: Payments & Policy Issuance (Days 22-26)
+**Goal:** Take payment and deliver the digital product.
 
-### Day 16: Stripe Setup
-*   [ ] **Stripe Account:** Set up Stripe test mode.
-*   [ ] **Checkout:** Create a Stripe Checkout Session for the "First Month Premium".
-*   [ ] **Deliverable:** Redirect user to Stripe payment page.
+### Day 22: Stripe Integration
+*   [ ] **Stripe Setup:** Create Stripe account, configure test mode.
+*   [ ] **Checkout Session:** Create session for first month premium.
+*   [ ] **Redirect Flow:** User → Stripe Checkout → Success/Cancel pages.
+*   [ ] **Deliverable:** Payment collection working in test mode.
 
-### Day 17: Payment Fulfillment
-*   [ ] **Webhook:** Create a Supabase Edge Function to listen for `checkout.session.completed`.
-*   [ ] **Status Update:** When paid, update policy status to `active`.
-*   [ ] **Deliverable:** Application moves to "Active" state after payment.
+### Day 23: Payment Webhook Handler
+*   [ ] **Edge Function:** Create `stripe-webhook` handler.
+*   [ ] **Event Handling:** 
+    - `checkout.session.completed` → Create policy, set to `active`
+    - `invoice.payment_failed` → Alert user, set policy `at_risk`
+*   [ ] **Payment Record:** Save to `payments` table.
+*   [ ] **Deliverable:** Automated policy activation on payment.
 
-### Day 18: PDF Generation
-*   [ ] **PDF Lib:** Use `jspdf` or similar in an Edge Function.
-*   [ ] **Template:** Create a simple certificate template (Logo, Policy #, Dates, Beneficiaries).
+### Day 24: PDF Policy Generation
+*   [ ] **PDF Library:** Use `@react-pdf/renderer` (client-side) or external service.
+*   [ ] **Template:** Design policy certificate:
+    - aem-consultings logo, policy number
+    - Insured name, coverage details
+    - Effective/expiration dates
+    - Beneficiaries list
 *   [ ] **Generation:** Render PDF with user data.
-*   [ ] **Deliverable:** A downloadable policy file.
+*   [ ] **Deliverable:** Downloadable policy document.
 
-### Day 19: Policy Delivery
-*   [ ] **Storage:** Upload generated PDF to Supabase Storage (private bucket).
-*   [ ] **Email:** Use Resend (API) to email the PDF and "Welcome" message to the user.
-*   [ ] **Deliverable:** User receives their policy via email.
+### Day 25: Policy Storage & Delivery
+*   [ ] **Supabase Storage:** Upload PDF to private bucket.
+*   [ ] **Signed URLs:** Generate time-limited download links.
+*   [ ] **Email Delivery:** Use Resend to send welcome email with PDF.
+*   [ ] **Deliverable:** User receives policy via email.
 
-### Day 20: Dashboard Polish
-*   [ ] **Policy View:** Update Dashboard to show "Active Policy" card with "Download Policy" button.
-*   [ ] **End-to-End Test:** Run through the whole flow: Chat -> Quote -> Account -> App -> Pay -> Email.
+### Day 26: Dashboard Enhancement
+*   [ ] **Active Policy Card:** Show policy details, download button.
+*   [ ] **Payment History:** List past payments.
+*   [ ] **Support Link:** "Questions? Email support@aem-consultings.com".
+*   [ ] **End-to-End Test:** Complete flow: Chat → Quote → Apply → Pay → Email.
+*   [ ] **Deliverable:** Polished user dashboard.
 
 ---
 
-## Phase 5: Admin, Admin & Launch (Days 21-25)
-**Goal:** Tools for you to manage the business and go live.
+## Phase 6: Admin, Testing & Launch (Days 27-32)
+**Goal:** Build admin tools, test thoroughly, and go live.
 
-### Day 21: Admin Dashboard
-*   [ ] **Admin Role:** Create an `admin` flag in `users` table.
-*   [ ] **Table View:** Create a page to list all applications and their status.
-*   [ ] **Detail View:** Click to see user chat logs and application answers.
-*   [ ] **Deliverable:** Internal tool to see who is buying.
+### Day 27: Admin Dashboard - Foundation
+*   [ ] **Admin Check:** Verify `is_admin` flag before showing admin routes.
+*   [ ] **Applications List:** Table of all applications with status, date, name.
+*   [ ] **Filters:** Filter by status (pending, approved, rejected).
+*   [ ] **Deliverable:** Basic admin application view.
 
-### Day 22: Security Audit
-*   [ ] **RLS Check:** Verify no user can see another's data.
-*   [ ] **Input Validation:** Ensure API endpoints validate all inputs (Zod).
-*   [ ] **Env Vars:** Ensure secrets are not exposed in frontend bundles.
+### Day 28: Admin Dashboard - Details
+*   [ ] **Application Detail:** View full application data.
+*   [ ] **Chat History:** See user's conversation with the aem-consultings assistant.
+*   [ ] **Manual Actions:** Approve/Reject with reason (for `under_review` apps).
+*   [ ] **Deliverable:** Full admin capabilities.
 
-### Day 23: Mobile Optimization
-*   [ ] **Responsiveness:** Test Chat and Application on mobile view.
-*   [ ] **Touch Targets:** Ensure buttons and inputs are thumb-friendly.
+### Day 29: Error Tracking & Monitoring
+*   [ ] **Sentry Setup:** Install Sentry SDK for frontend + Edge Functions.
+*   [ ] **Error Boundaries:** Add React error boundaries to key features.
+*   [ ] **Logging:** Structured logging in Edge Functions.
+*   [ ] **Deliverable:** Production-ready error tracking.
 
-### Day 24: Chatbot Fine-Tuning
-*   [ ] **Guardrails:** Update system prompt to avoid giving financial advice or making guarantees.
-*   [ ] **Fallback:** Handle "I don't know" cases by offering a support email.
+### Day 30: Security Audit & Testing
+*   [ ] **RLS Verification:** Test that users cannot access other users' data.
+*   [ ] **Input Validation:** Verify all API endpoints validate inputs (Zod).
+*   [ ] **Secrets Check:** Ensure no API keys exposed in frontend bundle.
+*   [ ] **Unit Tests:** Test quote calculation logic.
+*   [ ] **Deliverable:** Security verified.
 
-### Day 25: Deployment & Launch
-*   [ ] **Domain:** Connect custom domain in Vercel.
-*   [ ] **Prod Keys:** Switch Supabase/Stripe/Resend keys to Production mode.
-*   [ ] **Live Test:** Purchase a $1 policy with a real card.
-*   [ ] **Go Live!**
+### Day 31: Mobile & Accessibility
+*   [ ] **Responsive Testing:** Test chat, application on mobile viewport.
+*   [ ] **Touch Targets:** Ensure 44x44px minimum for interactive elements.
+*   [ ] **Accessibility:** Screen reader test, ARIA labels, keyboard navigation.
+*   [ ] **Deliverable:** Mobile-friendly and accessible.
+
+### Day 32: AI Guardrails & Polish
+*   [ ] **Prompt Updates:** Refine AI to avoid financial advice, handle edge cases.
+*   [ ] **Fallback Responses:** Graceful "I don't know" → offer support email.
+*   [ ] **Disclaimers:** Ensure all required legal text is visible.
+*   [ ] **Deliverable:** Production-safe AI chat.
+
+### Day 33: Staging & Final Testing
+*   [ ] **Staging Environment:** Deploy to staging.aem-consultings.com (Vercel preview).
+*   [ ] **Full E2E Test:** Complete happy path with test data.
+*   [ ] **Bug Fixes:** Address any issues found.
+*   [ ] **Deliverable:** Staging environment validated.
+
+### Day 34: Production Launch
+*   [ ] **Domain Setup:** Connect custom domain in Vercel.
+*   [ ] **Production Keys:** Switch Supabase/Stripe/Resend to production mode.
+*   [ ] **DNS/SSL:** Verify HTTPS working on custom domain.
+*   [ ] **Live Test:** Purchase a $1 test policy with real card.
+*   [ ] **Monitoring:** Verify Sentry, logging working in production.
+*   [ ] **Go Live! 🎉**
+
+---
+
+## Phase 7: Post-MVP Enhancements (Days 35-50)
+**Goal:** Expand features and improve the product based on initial feedback.
+
+### Week 7 (Days 35-37): Analytics & Insights
+*   [ ] **Funnel Tracking:** Implement conversion tracking at each step.
+*   [ ] **Dashboard Metrics:** Admin view of key KPIs.
+*   [ ] **AI Performance:** Track messages-to-quote, extraction accuracy.
+*   [ ] **Deliverable:** Data-driven insights.
+
+### Week 8 (Days 38-41): Health Insurance Products
+*   [ ] **Health Quote Logic:** Different pricing model for health products.
+*   [ ] **Health Questions:** Separate medical questionnaire.
+*   [ ] **Plan Comparison:** Side-by-side plan comparison UI.
+*   [ ] **Deliverable:** Health insurance offering.
+
+### Week 9 (Days 42-44): Advanced AI Features
+*   [ ] **Context Memory:** AI remembers user across sessions.
+*   [ ] **Proactive Suggestions:** "You mentioned kids—consider child protection."
+*   [ ] **Sentiment Analysis:** Detect frustrated users, offer human handoff.
+*   [ ] **Deliverable:** Smarter AI interactions.
+
+### Week 10 (Days 45-47): Retention & Growth
+*   [ ] **Renewal Reminders:** Automated emails before policy expiration.
+*   [ ] **Referral Program:** $25 credit per successful referral.
+*   [ ] **Policy Comparison:** Compare aem-consultings quotes vs. competitors.
+*   [ ] **Deliverable:** Growth features.
+
+### Week 11 (Days 48-50): Agent Channel (B2B)
+*   [ ] **Agent Portal:** White-label quote tool for agents.
+*   [ ] **Commission Tracking:** Record agent-attributed sales.
+*   [ ] **Co-Browsing:** Support agents can view customer screens.
+*   [ ] **Deliverable:** B2B distribution channel.
+
+---
+
+## Future Phases (Backlog)
+
+### Compliance & Scale
+- [ ] State-specific form variations
+- [ ] Multi-language support (Spanish priority)
+- [ ] Database read replicas for scale
+- [ ] SOC 2 compliance preparation
+
+### Native Mobile
+- [ ] React Native app
+- [ ] Push notifications for reminders
+- [ ] Biometric login (Face ID, Touch ID)
+
+### Advanced Underwriting
+- [ ] Integration with MIB (Medical Information Bureau)
+- [ ] Prescription drug check (RxCheck)
+- [ ] Dynamic pricing based on lifestyle data
+
+---
+
+## Risk Mitigation
+
+| Risk | Mitigation |
+|------|------------|
+| OpenAI API costs high | Rate limiting, caching common responses, fallback to cheaper models |
+| Supabase free tier limits | Monitor usage, upgrade plan if needed, optimize queries |
+| PDF generation memory limits | Use client-side generation or external PDF service |
+| Stripe integration issues | Thorough testing in test mode, use Stripe CLI for webhook testing |
+| Security vulnerabilities | Regular RLS audits, input validation, Sentry alerts for anomalies |
+
+---
+
+## Success Metrics (MVP)
+
+| Metric | Target | How to Measure |
+|--------|--------|----------------|
+| Chat → Quote conversion | > 50% | Funnel analytics |
+| Quote → Application | > 30% | Funnel analytics |
+| Application → Approval | > 70% | (qualified applicants) |
+| Time to quote | < 3 minutes | Average from chat start |
+| Customer satisfaction | > 4.0/5 | Post-purchase survey |
+| AI accuracy | > 90% | Manual review of extractions |
