@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { UserCheck } from 'lucide-react';
+import aliciaImage from '../assets/alicia_main.jpg';
 
 const About = () => {
   return (
@@ -13,14 +13,12 @@ const About = () => {
            transition={{ duration: 0.8 }}
            className="relative order-2 md:order-1"
         >
-          <div className="relative z-10 aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-white flex items-center justify-center border border-white shadow-gray-200/50">
-             {/* Placeholder for Alicia's Image */}
-             <div className="text-center p-8">
-                <div className="w-24 h-24 bg-gold-100 rounded-full mx-auto flex items-center justify-center mb-4">
-                  <UserCheck className="w-10 h-10 text-gold-500" />
-                </div>
-                <p className="text-gray-500 italic">"Security is the new luxury."</p>
-             </div>
+          <div className="relative z-10 aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-navy-900 flex items-center justify-center border border-white shadow-gray-200/50">
+             <img 
+               src={aliciaImage} 
+               alt="Alicia Elizabeth Mitchell" 
+               className="w-full h-full object-cover"
+             />
           </div>
           <div className="absolute top-10 -left-10 w-full h-full border border-gold-400/30 rounded-2xl -z-10" />
         </motion.div>
@@ -45,13 +43,35 @@ const About = () => {
             Your Partner in Wealth Preservation and Legacy Building.
           </p>
 
-          <div className="space-y-4 text-gray-600 leading-relaxed">
+          <div className="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
             <p>
-              In a world of uncertainty, true peace of mind is the ultimate luxury. I specialize in helping financially fit women and families not just protect what they have, but build an empire for the future.
+              Alicia Elizabeth Mitchell holds over 25 years of progressive executive leadership in psychiatric care, behavioral health, hospital operations, state and federal government, driving strategic planning, regulatory compliance, workforce development, and operational excellence across multidisciplinary departments.
             </p>
             <p>
-              My approach is advisory, urgent, and deeply personal. We don't just sell policies; we construct safety nets that turn into springboards for generational wealth.
+              She brings deep expertise in performance improvement, risk mitigation, compliance (TJC, CMS, COA, ACA, CARF, DJJ OSHA, etc.), and stakeholder engagement, and is certified as a Lean Six Sigma Black, Green, Yellow and White belt. Her background spans hospital administration, quality assurance, risk and incident management, and program operations, consistently advancing care standards, optimizing systems, and leading organizational transformation.
             </p>
+            <p>
+              She is passionate about building inclusive, high-performing teams and implementing sustainable systems that support both clinical excellence and operational growth.
+            </p>
+            <p>
+              As part of Ms. Mitchell's future developments she plans on educating those on financial literacy and planned protection in the areas of life, wellness and accident insurance. She is currently a licensed agent in the states of Georgia, South Carolina, Florida and Texas. She has over 25 vendor selections to ensure you and your family receive the right protection.
+            </p>
+            
+            <div className="pt-4">
+              <h3 className="font-serif font-bold text-navy-900 mb-3">Specialties</h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Strategic Operations", "Quality & Risk Management", "Compliance", 
+                  "Human Resources", "Budgeting & Procurement", "Lean Six Sigma", 
+                  "Policy Development", "Organizational Change", "Life Insurance", 
+                  "Health Insurance", "IULs for high income producers", "Financial and Estate Planning"
+                ].map((item, index) => (
+                  <span key={index} className="bg-white border border-gold-200 text-navy-800 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="pt-8">
