@@ -14,18 +14,18 @@ This roadmap breaks down the development of the **aem-consultings Insurance Plat
 **Goal:** Set up the infrastructure and development environment.
 
 ### Day 1: Project & Supabase Setup
-*   [ ] **Supabase Project:** Create a new Supabase project (Free Tier).
-*   [ ] **Env Configuration:** Set up `.env.local` with Supabase URL/Anon Key.
-*   [ ] **Cleanup:** Clear existing demo components to make space for the product.
-*   [ ] **Verification:** App runs locally and connects to Supabase.
-*   [ ] **Deliverable:** Development environment ready.
+*   [x] **Supabase Project:** Create a new Supabase project (Free Tier).
+*   [x] **Env Configuration:** Set up `.env.local` with Supabase URL/Anon Key.
+*   [x] **Cleanup:** Clear existing demo components to make space for the product.
+*   [x] **Verification:** App runs locally and connects to Supabase.
+*   [x] **Deliverable:** Development environment ready.
 
 ### Day 2: UI Foundation & Design System
-*   [ ] **shadcn/ui Setup:** Initialize shadcn/ui with Tailwind.
-*   [ ] **Core Components:** Install Button, Input, Card, Dialog, Form components.
-*   [ ] **Theme:** Configure brand colors (warm, trustworthy palette).
-*   [ ] **Layout:** Create base layout component with responsive container.
-*   [ ] **Deliverable:** Design system foundation established.
+*   [x] **shadcn/ui Setup:** Initialize shadcn/ui with Tailwind.
+*   [x] **Core Components:** Install Button, Input, Card, Dialog, Form components.
+*   [x] **Theme:** Configure brand colors (warm, trustworthy palette).
+*   [x] **Layout:** Create base layout component with responsive container.
+*   [x] **Deliverable:** Design system foundation established.
 
 ### Day 3: Database Schema & Security
 *   [ ] **Schema Creation:** Create all MVP tables in Supabase:
