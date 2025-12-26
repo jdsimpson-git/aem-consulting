@@ -28,7 +28,7 @@ This roadmap breaks down the development of the **aem-consultings Insurance Plat
 *   [x] **Deliverable:** Design system foundation established.
 
 ### Day 3: Database Schema & Security
-*   [ ] **Schema Creation:** Create all MVP tables in Supabase:
+*   [x] **Schema Creation:** Create all MVP tables in Supabase:
     - `users` (extended profile)
     - `conversations`
     - `chat_messages`
@@ -37,18 +37,18 @@ This roadmap breaks down the development of the **aem-consultings Insurance Plat
     - `policies`
     - `payments`
     - `audit_log`
-*   [ ] **RLS Policies:** Enable Row Level Security on all tables.
-*   [ ] **Indexes:** Create performance indexes (see DESIGN_SPEC.md).
-*   [ ] **Deliverable:** Database tables created and secured.
+*   [x] **RLS Policies:** Enable Row Level Security on all tables.
+*   [x] **Indexes:** Create performance indexes (see DESIGN_SPEC.md).
+*   [x] **Deliverable:** Database tables created and secured.
 
 ### Day 4: State Management & Project Structure
-*   [ ] **Zustand Setup:** Create stores for:
+*   [x] **Zustand Setup:** Create stores for:
     - `useAuthStore` (user session)
     - `useChatStore` (conversation state)
     - `useQuoteStore` (current quote)
-*   [ ] **Folder Structure:** Organize `/components`, `/hooks`, `/stores`, `/lib`, `/pages`.
-*   [ ] **API Client:** Set up Supabase client wrapper with error handling.
-*   [ ] **Deliverable:** Clean architecture established.
+*   [x] **Folder Structure:** Organize `/components`, `/hooks`, `/stores`, `/lib`, `/pages`.
+*   [x] **API Client:** Set up Supabase client wrapper with error handling.
+*   [x] **Deliverable:** Clean architecture established.
 
 ---
 

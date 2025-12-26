@@ -10,3 +10,21 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+/**
+ * Helper to handle Supabase responses with consistent error logging
+ * @param {Promise} request - The Supabase query promise
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const handleSupabase = async (request) => {
+  try {
+    const { data, error } = await request;
+    if (error) {
+      console.error("Supabase API Error:", error.message, error.details);
+    }
+    return { data, error };
+  } catch (err) {
+    console.error("Unexpected Supabase Error:", err);
+    return { data: null, error: err };
+  }
+};
