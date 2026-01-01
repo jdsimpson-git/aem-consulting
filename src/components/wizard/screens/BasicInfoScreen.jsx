@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../../ui/button';
@@ -18,6 +18,26 @@ const BasicInfoScreen = () => {
     nextStep,
     prevStep
   } = useWizardStore();
+
+  const monthRef = useRef(null);
+  const dayRef = useRef(null);
+  const yearRef = useRef(null);
+
+  const handleMonthChange = (e) => {
+    const value = e.target.value;
+    setComplexField('dateOfBirth', 'month', value);
+    if (value.length === 2) {
+      dayRef.current?.focus();
+    }
+  };
+
+  const handleDayChange = (e) => {
+    const value = e.target.value;
+    setComplexField('dateOfBirth', 'day', value);
+    if (value.length === 2) {
+      yearRef.current?.focus();
+    }
+  };
 
   const handleNext = () => {
     // Basic validation
@@ -61,28 +81,31 @@ const BasicInfoScreen = () => {
           <div className="flex gap-4 items-center">
             <div className="w-20">
               <input
+                ref={monthRef}
                 type="text"
                 placeholder="MM"
                 maxLength={2}
                 className="w-full p-3 border border-gray-200 rounded-lg text-center"
                 value={dateOfBirth.month}
-                onChange={(e) => setComplexField('dateOfBirth', 'month', e.target.value)}
+                onChange={handleMonthChange}
               />
             </div>
             <span className="text-gray-400">/</span>
             <div className="w-20">
               <input
+                ref={dayRef}
                 type="text"
                 placeholder="DD"
                 maxLength={2}
                 className="w-full p-3 border border-gray-200 rounded-lg text-center"
                 value={dateOfBirth.day}
-                onChange={(e) => setComplexField('dateOfBirth', 'day', e.target.value)}
+                onChange={handleDayChange}
               />
             </div>
             <span className="text-gray-400">/</span>
             <div className="w-28">
               <input
+                ref={yearRef}
                 type="text"
                 placeholder="YYYY"
                 maxLength={4}
