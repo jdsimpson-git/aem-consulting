@@ -1,16 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import aliciaImage from '../assets/alicia_main.jpg';
 
 const About = () => {
   return (
     <div className="py-24 relative overflow-hidden bg-cream-50 border-t border-gray-100">
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        <motion.div 
-           initial={{ opacity: 0, scale: 0.95 }}
-           whileInView={{ opacity: 1, scale: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8 }}
+        <div 
            className="relative order-2 md:order-1"
         >
           <div className="relative z-10 aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-navy-900 flex items-center justify-center border border-white shadow-gray-200/50">
@@ -21,13 +16,9 @@ const About = () => {
              />
           </div>
           <div className="absolute top-10 -left-10 w-full h-full border border-gold-400/30 rounded-2xl -z-10" />
-        </motion.div>
+        </div>
 
-        <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div 
           className="order-1 md:order-2 space-y-6"
         >
           <div className="inline-flex items-center space-x-2 text-gold-500">
@@ -79,7 +70,7 @@ const About = () => {
               Schedule Your Consultation
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

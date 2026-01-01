@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Baby, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const ChildWealth = () => {
@@ -10,11 +9,7 @@ const ChildWealth = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+          <div 
           >
             <div className="inline-flex items-center space-x-2 text-gold-500 mb-6">
               <Baby size={20} />
@@ -48,13 +43,9 @@ const ChildWealth = () => {
               Start Their Journey
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+          <div 
             className="relative"
           >
             <div className="relative z-10 bg-white p-1 rounded-2xl border border-gray-200 shadow-2xl shadow-gray-200/50">
@@ -85,11 +76,8 @@ const ChildWealth = () => {
                        <span className="text-gray-500">Cash Value @ Age 25</span>
                        <span className="font-mono text-gold-500 font-bold">$12,450+</span>
                     </div>
-                    <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
-                       <motion.div 
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "65%" }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
+                     <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
+                       <div 
                         className="h-full bg-gold-400 rounded-full"
                       />
                     </div>
@@ -107,7 +95,7 @@ const ChildWealth = () => {
             {/* Decorative circles */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-gold-400/20 rounded-full blur-2xl mix-blend-multiply" />
             <div className="absolute -bottom-5 -left-5 w-24 h-24 bg-teal-400/20 rounded-full blur-2xl mix-blend-multiply" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
