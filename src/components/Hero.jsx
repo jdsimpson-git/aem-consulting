@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Abstract Shapes */}
@@ -36,6 +39,7 @@ const Hero = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/wizard')}
               className="bg-gold-400 text-white px-8 py-4 font-bold uppercase tracking-widest hover:bg-gold-500 shadow-lg shadow-gold-400/30 transition-all flex items-center justify-center gap-2 group rounded-sm"
             >
               Book Strategy Session
