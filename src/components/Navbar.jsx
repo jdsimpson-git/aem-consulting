@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useWizardStore } from '../stores/useWizardStore';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { resetWizard } = useWizardStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,7 +39,10 @@ const Navbar = () => {
           <a href="#" className="text-navy-800 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">about</a>
           
           <button 
-            onClick={() => navigate('/wizard')}
+            onClick={() => {
+              resetWizard();
+              navigate('/wizard');
+            }}
             className="px-6 py-2 border border-gold-400 text-gold-400 font-medium text-sm tracking-wide hover:bg-gold-400 hover:text-white transition-all duration-300"
           >
             Book Strategy Session
@@ -67,6 +72,7 @@ const Navbar = () => {
               <a href="#" className="text-lg text-navy-800 uppercase tracking-widest pl-2 border-l-2 border-transparent hover:border-gold-400 hover:text-gold-400 transition-all">About</a>
               <button 
                 onClick={() => {
+                  resetWizard();
                   navigate('/wizard');
                   setIsOpen(false);
                 }}

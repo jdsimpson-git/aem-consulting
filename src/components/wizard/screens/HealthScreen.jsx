@@ -67,14 +67,14 @@ const HealthScreen = () => {
                 <Button 
                   variant={health.hospitalized === true ? "default" : "outline"}
                   onClick={() => updateHealth('hospitalized', true)}
-                  className={`w-16 ${health.hospitalized === true ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.hospitalized === true ? 'bg-navy-900 text-white' : ''}`}
                 >
                   Yes
                 </Button>
                 <Button 
                   variant={health.hospitalized === false ? "default" : "outline"}
                   onClick={() => updateHealth('hospitalized', false)}
-                  className={`w-16 ${health.hospitalized === false ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.hospitalized === false ? 'bg-navy-900 text-white' : ''}`}
                 >
                   No
                 </Button>
@@ -87,14 +87,14 @@ const HealthScreen = () => {
                 <Button 
                   variant={health.cancerTreated === true ? "default" : "outline"}
                   onClick={() => updateHealth('cancerTreated', true)}
-                  className={`w-16 ${health.cancerTreated === true ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.cancerTreated === true ? 'bg-navy-900 text-white' : ''}`}
                 >
                   Yes
                 </Button>
                 <Button 
                   variant={health.cancerTreated === false ? "default" : "outline"}
                   onClick={() => updateHealth('cancerTreated', false)}
-                  className={`w-16 ${health.cancerTreated === false ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.cancerTreated === false ? 'bg-navy-900 text-white' : ''}`}
                 >
                   No
                 </Button>
@@ -107,14 +107,14 @@ const HealthScreen = () => {
                 <Button 
                   variant={health.heartIssue === true ? "default" : "outline"}
                   onClick={() => updateHealth('heartIssue', true)}
-                  className={`w-16 ${health.heartIssue === true ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.heartIssue === true ? 'bg-navy-900 text-white' : ''}`}
                 >
                   Yes
                 </Button>
                 <Button 
                   variant={health.heartIssue === false ? "default" : "outline"}
                   onClick={() => updateHealth('heartIssue', false)}
-                  className={`w-16 ${health.heartIssue === false ? 'bg-navy-900' : ''}`}
+                  className={`w-16 ${health.heartIssue === false ? 'bg-navy-900 text-white' : ''}`}
                 >
                   No
                 </Button>

@@ -2,9 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useWizardStore } from '../stores/useWizardStore';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { resetWizard } = useWizardStore();
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -39,7 +41,10 @@ const Hero = () => {
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/wizard')}
+              onClick={() => {
+                resetWizard();
+                navigate('/wizard');
+              }}
               className="bg-gold-400 text-white px-8 py-4 font-bold uppercase tracking-widest hover:bg-gold-500 shadow-lg shadow-gold-400/30 transition-all flex items-center justify-center gap-2 group rounded-sm"
             >
               Book Strategy Session

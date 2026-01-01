@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { Label } from '../../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
+import { StateCombobox } from '../StateCombobox';
 
 const BasicInfoScreen = () => {
   const { 
@@ -31,15 +32,6 @@ const BasicInfoScreen = () => {
       nextStep();
     }
   };
-
-  const states = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", 
-    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
-    "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
-    "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", 
-    "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
-    "West Virginia", "Wisconsin", "Wyoming"
-  ];
 
   // Calculate age for display
   const calculateAge = () => {
@@ -134,16 +126,7 @@ const BasicInfoScreen = () => {
         {/* State */}
         <div className="space-y-2">
           <Label className="text-base font-semibold text-navy-900">State</Label>
-          <Select value={state} onValueChange={(val) => setField('state', val)}>
-            <SelectTrigger className="w-full py-6">
-              <SelectValue placeholder="Select your state" />
-            </SelectTrigger>
-            <SelectContent>
-              {states.map((s) => (
-                <SelectItem key={s} value={s}>{s}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <StateCombobox value={state} onChange={(val) => setField('state', val)} />
         </div>
 
         {/* Tobacco */}
