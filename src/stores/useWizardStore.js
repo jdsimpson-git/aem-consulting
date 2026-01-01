@@ -61,7 +61,7 @@ export const useWizardStore = create(
       ...initialWizardState,
 
       // Actions
-      setField: (field, value) => set((state) => ({ [field]: value })),
+      setField: (field, value) => set({ [field]: value }),
 
       setComplexField: (parent, field, value) =>
         set((state) => ({

@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Shield, TrendingUp, Heart } from 'lucide-react';
 
 const Features = () => {
@@ -27,25 +26,17 @@ const Features = () => {
   return (
     <div className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div 
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 text-navy-900">The Financial Fitness <span className="text-gold-500 italic">Methodology</span></h2>
           <p className="text-gray-600 max-w-2xl mx-auto">Our three-pillar approach ensures you are protected today while building prosperity for tomorrow.</p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-             <motion.div
+             <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
               className="bg-white border border-gray-100 p-8 rounded-2xl group hover:border-gold-400 hover:shadow-xl hover:shadow-gold-400/10 transition-all duration-300"
             >
               <div className="bg-cream-50 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-gold-100">
@@ -56,7 +47,7 @@ const Features = () => {
               <div className="pt-6 border-t border-gray-100">
                 <span className="text-xs font-bold uppercase tracking-widest text-teal-600">{feature.highlight}</span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

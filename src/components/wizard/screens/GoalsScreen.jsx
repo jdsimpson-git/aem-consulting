@@ -1,6 +1,5 @@
 import React from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
-import { motion } from 'framer-motion';
 import { ArrowRight, Users, Gift, Flower, HelpCircle, User, Heart } from 'lucide-react';
 import { Card } from '../../ui/card';
 import { Button } from '../../ui/button';
@@ -30,10 +29,7 @@ const GoalsScreen = () => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
+    <div
       className="space-y-8"
     >
       <div className="text-center space-y-4">
@@ -109,7 +105,7 @@ const GoalsScreen = () => {
           Next Step <ArrowRight className="ml-2" />
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

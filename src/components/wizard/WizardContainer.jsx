@@ -14,7 +14,7 @@ import ResultsScreen from './screens/ResultsScreen';
 import { Button } from '../ui/button';
 
 const WizardContainer = () => {
-  const { currentStep, totalSteps, resetWizard } = useWizardStore();
+  const { currentStep, totalSteps } = useWizardStore();
 
   const renderScreen = () => {
     switch(currentStep) {

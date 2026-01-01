@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useWizardStore } from '../stores/useWizardStore';
@@ -18,10 +17,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 z-10 grid md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+        <div 
           className="space-y-8"
         >
           <div className="inline-flex items-center space-x-2 bg-white border border-gray-200 shadow-sm px-4 py-1.5 rounded-full backdrop-blur-sm">
@@ -38,9 +34,7 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button 
               onClick={() => {
                 resetWizard();
                 navigate('/wizard');
@@ -49,22 +43,17 @@ const Hero = () => {
             >
               Book Strategy Session
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            </button>
+            <button 
               className="border border-navy-900/10 text-navy-900 px-8 py-4 font-bold uppercase tracking-widest hover:bg-navy-900/5 transition-colors rounded-sm"
             >
               Explore Solutions
-            </motion.button>
+            </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Hero Visual */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <div 
           className="relative hidden md:block"
         >
           <div className="relative z-10 bg-white/60 backdrop-blur-xl border border-white/60 p-8 rounded-2xl shadow-2xl shadow-navy-900/5 skew-y-[-2deg]">
@@ -82,10 +71,8 @@ const Hero = () => {
               <div className="space-y-4">
                 {[1, 2, 3].map((item) => (
                   <div key={item} className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: `${60 + item * 10}%` }}
-                      transition={{ duration: 1.5, delay: 0.5 + item * 0.2 }}
+                    <div 
+                      style={{ width: `${60 + item * 10}%` }}
                       className="h-full bg-gold-400"
                     />
                   </div>
@@ -101,7 +88,7 @@ const Hero = () => {
           {/* Decorative elements behind card */}
           <div className="absolute top-10 -right-10 w-full h-full border border-gold-400/20 rounded-2xl -z-10 skew-y-[-2deg]" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-teal-100 rounded-full blur-xl opacity-80 mix-blend-multiply" />
-        </motion.div>
+        </div>
       </div>
     </div>
   );

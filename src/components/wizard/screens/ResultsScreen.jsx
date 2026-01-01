@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
-import { motion } from 'framer-motion';
 import { CheckCircle, Phone, Clock } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { Card } from '../../ui/card';
@@ -43,9 +42,7 @@ const ResultsScreen = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <div
       className="space-y-8"
     >
       <div className="text-center space-y-2">
@@ -59,11 +56,8 @@ const ResultsScreen = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {quotes.map((quote, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
           >
             <Card className={`relative overflow-hidden h-full flex flex-col ${quote.recommended ? 'border-2 border-gold-400 shadow-xl scale-105 z-10' : 'border border-gray-200'}`}>
               {quote.recommended && (
@@ -109,7 +103,7 @@ const ResultsScreen = () => {
                 </Button>
               </div>
             </Card>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -125,7 +119,7 @@ const ResultsScreen = () => {
           (555) 555-5555
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

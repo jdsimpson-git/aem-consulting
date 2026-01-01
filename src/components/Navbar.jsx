@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useWizardStore } from '../stores/useWizardStore';
@@ -58,12 +57,8 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+      {isOpen && (
+          <div
             className="md:hidden bg-white absolute w-full border-t border-gray-100 shadow-lg"
           >
             <div className="flex flex-col p-6 space-y-4">
@@ -81,9 +76,8 @@ const Navbar = () => {
                 Book Session
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </nav>
   );
 };

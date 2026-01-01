@@ -1,30 +1,22 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { HeartPulse, Stethoscope, Briefcase } from 'lucide-react';
 
 const HealthProtection = () => {
   return (
     <div className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div 
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 text-navy-900">Health & Income <span className="text-teal-500 italic">Protection</span></h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Your ability to earn is your greatest asset. Protect it with comprehensive solutions designed for entrepreneurs and families.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Card 1 */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -5 }}
+          <div 
             className="group relative bg-cream-50 border border-gray-100 p-8 rounded-2xl hover:border-teal-400 hover:shadow-lg hover:shadow-teal-400/10 transition-all duration-300"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -43,14 +35,10 @@ const HealthProtection = () => {
                 <span>Coverage from $100/mo</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
            {/* Card 2 */}
-           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -5 }}
+           <div 
             className="group relative bg-cream-50 border border-gray-100 p-8 rounded-2xl hover:border-teal-400 hover:shadow-lg hover:shadow-teal-400/10 transition-all duration-300"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -69,7 +57,7 @@ const HealthProtection = () => {
                 <span>Safeguard Your Assets</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

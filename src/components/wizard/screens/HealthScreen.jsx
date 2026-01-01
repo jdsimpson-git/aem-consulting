@@ -1,6 +1,5 @@
 import React from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
-import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { Label } from '../../ui/label';
@@ -41,10 +40,7 @@ const HealthScreen = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
+    <div
       className="space-y-8"
     >
       <div className="text-center space-y-2">
@@ -195,9 +191,7 @@ const HealthScreen = () => {
         {(health.commonConditions.includes('diabetes') || 
           health.commonConditions.includes('heart_disease') || 
           health.commonConditions.includes('cancer_past')) && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+          <div 
             className="space-y-6 pt-4 border-t"
           >
             {health.commonConditions.includes('diabetes') && (
@@ -257,7 +251,7 @@ const HealthScreen = () => {
                 </Select>
               </div>
             )}
-          </motion.div>
+          </div>
         )}
 
       </div>
@@ -273,7 +267,7 @@ const HealthScreen = () => {
           Next Step <ArrowRight className="ml-2" size={20} />
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

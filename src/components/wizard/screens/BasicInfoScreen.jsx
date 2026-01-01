@@ -1,6 +1,5 @@
 import React from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
-import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { Label } from '../../ui/label';
@@ -45,10 +44,7 @@ const BasicInfoScreen = () => {
   const age = calculateAge();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
+    <div
       className="space-y-8"
     >
       <div className="text-center space-y-2">
@@ -158,9 +154,7 @@ const BasicInfoScreen = () => {
 
         {/* Tobacco Follow-up */}
         {tobaccoUse === true && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+          <div 
             className="space-y-2 pl-4 border-l-2 border-teal-500"
           >
             <Label className="text-base font-semibold text-navy-900">How often?</Label>
@@ -174,7 +168,7 @@ const BasicInfoScreen = () => {
                 <SelectItem value="quit_within_12_months">Quit within 12 months</SelectItem>
               </SelectContent>
             </Select>
-          </motion.div>
+          </div>
         )}
 
       </div>
@@ -190,7 +184,7 @@ const BasicInfoScreen = () => {
           Next Step <ArrowRight className="ml-2" size={20} />
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

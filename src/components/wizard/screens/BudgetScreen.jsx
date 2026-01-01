@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useWizardStore } from '../../../stores/useWizardStore';
-import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { Label } from '../../ui/label';
@@ -26,10 +25,7 @@ const BudgetScreen = () => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
+    <div
       className="space-y-8"
     >
       <div className="text-center space-y-2">
@@ -116,7 +112,7 @@ const BudgetScreen = () => {
           See My Options <ArrowRight className="ml-2" size={20} />
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
